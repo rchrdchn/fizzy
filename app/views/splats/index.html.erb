@@ -29,37 +29,6 @@
   <%= render @splats.last(10) %>
 </section>
 
-<menu class="splats-filter flex align-center justify-center gap margin-block-start margin-none unpad position-relative">
-  <li>
-    <button class="btn">
-      <%= image_tag "chart.svg", aria: { hidden: true }, size: 24 %>
-      <span class="for-screen-reader">Activity</span>
-      <input type="radio" name="view" checked>
-    </button>
-  </li>
-  <li>
-    <button class="btn">
-      <%= image_tag "temperature.svg", aria: { hidden: true }, size: 24 %>
-      <span class="for-screen-reader">Criticality</span>
-      <input type="radio" name="view">
-    </button>
-  </li>
-  <li>
-    <button class="btn">
-      <%= image_tag "inbox.svg", aria: { hidden: true }, size: 24 %>
-      <span class="for-screen-reader">Newest</span>
-      <input type="radio" name="view">
-    </button>
-  </li>
-  <li>
-    <button class="btn">
-      <%= image_tag "hourglass.svg", aria: { hidden: true }, size: 24 %>
-      <span class="for-screen-reader">Oldest</span>
-      <input type="radio" name="view">
-    </button>
-  </li>
-</menu>
-
 <section class="splats-list unpad-inline center margin-block-start">
   <ul class="unpad margin-none flex flex-column txt-align-start center">
     <% @splats.each do | splat | %>
