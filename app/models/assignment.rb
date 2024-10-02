@@ -1,6 +1,6 @@
 class Assignment < ApplicationRecord
-  belongs_to :user
   belongs_to :bubble
+  belongs_to :assignee, class_name: "User"
 
-  validates :user_id, uniqueness: { scope: :bubble_id }
+  validates :assignee, uniqueness: { scope: :bubble }
 end

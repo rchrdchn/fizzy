@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_02_103608) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_02_161258) do
   create_table "accesses", force: :cascade do |t|
     t.integer "bucket_id", null: false
     t.integer "user_id", null: false
@@ -59,12 +59,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_02_103608) do
   end
 
   create_table "assignments", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "assignee_id", null: false
     t.integer "bubble_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["assignee_id"], name: "index_assignments_on_assignee_id"
     t.index ["bubble_id"], name: "index_assignments_on_bubble_id"
-    t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
   create_table "boosts", force: :cascade do |t|

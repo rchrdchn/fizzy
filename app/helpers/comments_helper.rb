@@ -29,7 +29,7 @@ module CommentsHelper
 
     def initial_assignment_info(combined_collection)
       initial_assignment = combined_collection.find { |item| item.is_a?(Assignment) }
-      "assigned to #{initial_assignment.user.name}" if initial_assignment
+      "assigned to #{initial_assignment.assignee.name}" if initial_assignment
     end
 
     def render_initial_boosts(combined_collection)
@@ -75,6 +75,6 @@ module CommentsHelper
     end
 
     def render_grouped_assignments(assignments)
-      assignments.map { |assignment| "Assigned to #{assignment.user.name} #{time_ago_in_words(assignment.created_at)} ago" }
+      assignments.map { |assignment| "Assigned to #{assignment.assignee.name} #{time_ago_in_words(assignment.created_at)} ago" }
     end
 end
