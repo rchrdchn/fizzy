@@ -27,8 +27,8 @@
 </section>
 
 <section class="bubbles-list unpad-inline center margin-block-start">
-  <header class="flex-inline align-center center gap txt-small margin-block-end-half">
-    <form>
+  <header class="flex-inline align-center gap txt-small margin-block-end-half center">
+    <form class="flex-item-no-shrink">
       <input type="search" name="filter" class="input center flex-inline" placeholder="Type to filter…" value="<%= params[:filter] %>">
       <% params.permit(:tag_id, :assignee_id).each do |name, value| %>
         <%= hidden_field_tag name, value %>
