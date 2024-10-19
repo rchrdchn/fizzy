@@ -20,7 +20,7 @@
 
 <section class="windshield flex-inline flex-wrap gap justify-center align-end" style="view-transition-name: windshield_<%= @bucket.id %>">
   <% if @bubbles.any? %>
-    <%= render partial: "bubbles/bubble", collection: @bubbles.limit(10) %>
+    <%= render partial: "bubbles/bubble", collection: @bubbles.limit(10), cached: true %>
   <% else %>
     <p><strong>Nothing here.</strong></p>
   <% end %>
