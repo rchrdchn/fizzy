@@ -75,6 +75,7 @@
 
 .rollup {
   font-weight: 600;
+  min-height: 2.33em;
   margin-block: calc(var(--comment-padding-block) * -1);
   padding: calc(var(--comment-padding-block) * 0.5) var(--comment-padding-inline);
   gap: 0.5ch;
