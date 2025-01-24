@@ -1,6 +1,6 @@
 body {
   display: grid;
-  grid-template-rows: auto 1fr auto var(--block-space);
+  grid-template-rows: auto 1fr auto 10rem;
 }
 
 :where(#main) {
