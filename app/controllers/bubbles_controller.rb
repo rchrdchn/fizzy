@@ -12,7 +12,7 @@ class BubblesController < ApplicationController
 
   def create
     @bubble = @bucket.bubbles.create!
-    redirect_to bucket_bubble_path(@bubble.bucket, @bubble, editing: true)
+    redirect_to bucket_bubble_path(@bubble.bucket, @bubble)
   end
 
   def show

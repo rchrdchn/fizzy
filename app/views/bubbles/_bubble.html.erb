@@ -8,7 +8,7 @@
 
     <div>
       <h1 class="bubble__title">
-        <% if local_assigns[:editing] %>
+        <% if bubble.creating? %>
           <%= turbo_frame_tag bubble, :edit, src: edit_bucket_bubble_path(bubble.bucket, bubble) %>
         <% else %>
           <%= turbo_frame_tag bubble, :edit do %>
