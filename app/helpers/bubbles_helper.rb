@@ -30,4 +30,8 @@ module BubblesHelper
   def previewing_card?
     @previewing_bubble
   end
+
+  def editable_bubble_stage?(bubble)
+    !previewing_card? && !bubble.popped? && bubble.doing?
+  end
 end

@@ -1,9 +1,9 @@
-<% cache [ bubble, previewing_card? ] do %>
+<% cache [bubble, previewing_card?] do %>
   <article class="card shadow border flex flex-column position-relative txt-align-start full-width border-radius"
-        style="--bubble-color: <%= bubble.color %>; view-transition-name: <%= dom_id(bubble, :ticket) %>;"
-        id="<%= dom_id(bubble, :ticket) %>">
+    style="--bubble-color: <%= bubble.color %>; view-transition-name: <%= dom_id(bubble, :ticket) %>;"
+    id="<%= dom_id(bubble, :ticket) %>">
     <header class="card__header flex align-center gap min-width">
-      <%= link_to bubble.bucket.name, bubbles_path(bucket_ids: [ bubble.bucket ]),
+      <%= link_to bubble.bucket.name, bubbles_path(bucket_ids: [bubble.bucket]),
             class: "card__bucket txt-uppercase overflow-ellipsis txt-reversed" %>
 
       <%= render "bubbles/tags", bubble: bubble %>
@@ -19,9 +19,9 @@
           <% else %>
             <%= form_with model: bubble, url: bucket_bubble_path(bubble.bucket, bubble), id: "bubble_form", data: { controller: "auto-save" } do |form| %>
               <%= form.text_area :title, placeholder: "Name it…",
-                  class: "input input--textarea full-width borderless txt-align-start #{ "fill-highlight" if bubble.creating? }",
-                  autofocus: bubble.title.blank?,
-                  data: { action: "auto-save#change blur->auto-save#submit keydown.enter->auto-save#submit:prevent keydown.ctrl+enter->auto-save#submit:prevent" } %>
+                    class: "input input--textarea full-width borderless txt-align-start #{ "fill-highlight" if bubble.creating? }",
+                    autofocus: bubble.title.blank?,
+                    data: { action: "auto-save#change blur->auto-save#submit keydown.enter->auto-save#submit:prevent keydown.ctrl+enter->auto-save#submit:prevent" } %>
             <% end %>
           <% end %>
         </h1>
@@ -30,12 +30,17 @@
         <% end %>
       </div>
 
-      <%= turbo_frame_tag dom_id(bubble, :stage_picker), src: new_bucket_bubble_stage_picker_path(bubble.bucket, bubble), refresh: :morph unless (previewing_card? && bubble.popped?) %>
+      <%= turbo_frame_tag dom_id(bubble, :stage_picker), src: new_bucket_bubble_stage_picker_path(bubble.bucket, bubble) if editable_bubble_stage?(bubble) %>
 
-      <% if bubble.stage.nil? %>
-        <%= button_to bucket_bubble_stagings_path(bubble.bucket, bubble, stage_id: bubble.bucket&.workflow&.stages&.first), method: :post, class: "card__move-button card__hide-on-index btn btn--reversed" do %>
+      <% if bubble.considering? %>
+        <%= button_to bucket_bubble_engagement_path(bubble.bucket, bubble), method: :post, class: "card__move-button card__hide-on-index btn btn--reversed" do %>
           <span class="txt-nowrap">Move to Doing</span>
           <%= icon_tag "arrow-right" %>
+        <% end %>
+      <% else %>
+        <%= button_to bucket_bubble_engagement_path(bubble.bucket, bubble), method: :delete, class: "card__move-button card__hide-on-index btn btn--reversed" do %>
+          <%= icon_tag "arrow-left" %>
+          <span class="txt-nowrap">Reconsider</span>
         <% end %>
       <% end %>
     </div>
