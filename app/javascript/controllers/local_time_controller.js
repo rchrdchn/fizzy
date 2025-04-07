@@ -104,7 +104,7 @@ class DaysAgoFormatter {
 
     if (dayDiff === 0) return "Today"
     if (dayDiff === 1) return "Yesterday"
-    return `in ${dayDiff} days`
+    return `${dayDiff} days ago`
   }
 }
 
