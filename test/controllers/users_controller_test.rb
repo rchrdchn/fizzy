@@ -1,15 +1,36 @@
 require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    sign_in_as :kevin
+  test "new" do
+    get new_user_path(params: { join_code: "bad" })
+    assert_response :forbidden
+
+    get new_user_path(params: { join_code: accounts(:"37s").join_code })
+    assert_response :ok
+  end
+
+  test "create" do
+    assert_difference -> { User.active.count }, +1 do
+      post users_path(params: { join_code: accounts(:"37s").join_code }),
+        params: { user: { name: "Dash", email_address: "dash@example.com", password: "123" } } 
+      assert_redirected_to root_path
+    end
+
+    follow_redirect!
+    assert_response :ok
   end
 
   test "update" do
-    assert true
+    sign_in_as :kevin
+
+    put user_path(users(:kevin)), params: { user: { name: "New Kevin" } }
+    assert_redirected_to user_path(users(:kevin))
+    assert_equal "New Kevin", users(:kevin).reload.name
   end
 
   test "destroy" do
+    sign_in_as :kevin
+
     assert_difference -> { User.active.count }, -1 do
       delete user_path(users(:david))
     end
