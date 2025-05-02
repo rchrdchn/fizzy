@@ -8,7 +8,6 @@
 
     color: inherit;
     inline-size: 100%;
-    text-transform: uppercase;
 
     @media (hover: hover) {
       &:hover {
