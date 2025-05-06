@@ -74,8 +74,9 @@
     transition: none;
 
     &.expanded {
-      animation: react 0.2s both;
+      animation: react 300ms both;
       transform: translate3d(0, 0, 0);
+      transform-origin: left center;
     }
 
     .reaction__form-label:focus {
