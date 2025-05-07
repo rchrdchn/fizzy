@@ -2,7 +2,7 @@ class Command::FilterCards < Command
   store_accessor :data, :card_ids, :params
 
   def title
-    "Filter cards #{card_ids.join(",")}"
+    "Filter cards #{card_ids.join(", ")}"
   end
 
   def execute
