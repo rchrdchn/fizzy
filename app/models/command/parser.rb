@@ -39,7 +39,7 @@ class Command::Parser
     def parse_free_string(string)
       if cards = multiple_cards_from(string)
         Command::FilterCards.new(card_ids: cards.ids, params: filter.as_params)
-      elsif card = user.accessible_cards.find_by_id(string)
+      elsif card = single_card_from(string)
         Command::GoToCard.new(card_id: card.id)
       else
         Command::Search.new(query: string, params: filter.as_params)
@@ -53,5 +53,9 @@ class Command::Parser
           cards.any? ? cards : nil
         end
       end
+    end
+
+    def single_card_from(string)
+      user.accessible_cards.find_by_id(string)
     end
 end
