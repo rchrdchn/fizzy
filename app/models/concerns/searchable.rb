@@ -56,7 +56,7 @@ module Searchable
     end
 
     def refresh_search_embedding_later
-      Search::RefreshSearchEmbeddingJob.perform_later(self)
+      Search::RefreshEmbeddingJob.perform_later(self)
     end
 
     def execute_sql_with_binds(*statement)

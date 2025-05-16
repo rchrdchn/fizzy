@@ -1,4 +1,4 @@
-class Search::RefreshSearchEmbeddingJob < ApplicationJob
+class Search::RefreshEmbeddingJob < ApplicationJob
   def perform(record)
     record.refresh_search_embedding
   end
