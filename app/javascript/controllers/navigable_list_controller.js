@@ -17,7 +17,6 @@ export default class extends Controller {
   // Actions
 
   reset(event) {
-    console.debug("SE LLEGA REVERSE", this.reverseOrderValue);
     if (this.reverseOrderValue) {
       this.selectLast()
     } else {
