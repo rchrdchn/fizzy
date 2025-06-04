@@ -5,8 +5,8 @@
 
 writebook_collection:
   container: writebook (Collection)
-  auto_reconsider_period: <%= 30.days.to_i %>
-  auto_close_period: <%= 30.days.to_i %>
+  auto_reconsider_period: <%= 90.days.to_i %>
+  auto_close_period: <%= 90.days.to_i %>
 
 private_collection:
   container: private (Collection)
