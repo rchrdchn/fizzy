@@ -32,7 +32,7 @@ class CollectionsControllerTest < ActionDispatch::IntegrationTest
         name: "Writebook bugs",
         all_access: false,
         auto_close_period: 1.day,
-        auto_reconsider_period: 2.days,
+        auto_reconsider_period: 2.days
       },
       user_ids: users(:david, :jz).pluck(:id)
     }
