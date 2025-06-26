@@ -1,0 +1,33 @@
+@layer components {
+  /* Centered title with space for two buttons on either side */
+  .header {
+    --header-gap: 0.5rem;
+    --header-btn-size: 2.65em;
+    --header-button-count: 0;
+    --header-actions-width: calc((var(--header-btn-size) + var(--header-gap)) * var(--header-button-count));
+
+    display: grid;
+    grid-template-columns: var(--header-actions-width) 1fr var(--header-actions-width);
+    padding: var(--block-space-half) var(--inline-space);
+
+    /* Change the grid size depending on how many buttons are present */
+    &:has(.header__actions > *:nth-child(1)) { --header-button-count: 1; }
+    &:has(.header__actions > *:nth-child(2)) { --header-button-count: 2; }
+    &:has(.header__actions > *:nth-child(3)) { --header-button-count: 3; }
+  }
+
+  .header__actions {
+    display: flex;
+    gap: var(--header-gap);
+  }
+
+  .header__actions--end {
+    justify-content: flex-end;
+  }
+
+  .header__title {
+    font-size: var(--text-large);
+    font-weight: 900;
+    margin: 0;
+  }
+}

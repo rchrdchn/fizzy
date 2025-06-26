@@ -6,10 +6,26 @@
   <%= render "cards/index/header", filter: @filter %>
 <% end %>
 
-<header class="margin-block-end">
-  <span class="txt-large overflow-ellipsis margin-none font-black" style="view-transistion-name: card-collection-title">
+<header class="header">
+  <div class="header__actions header__actions--start">
+    <%= link_to_home %>
+  </div>
+
+  <h1 class="header__title overflow-ellipsis" style="view-transistion-name: card-collection-title">
     <span><%= filter_title @filter %></span>
-  </span>
+  </h1>
+
+  <div class="header__actions header__actions--end">
+    <% if collection = @filter.single_collection %>
+      <%= access_involvement_advance_button collection, Current.user %>
+
+      <%= link_to edit_collection_path(collection), class: "btn" do %>
+        <%= icon_tag "settings" %>
+        <span class="for-screen-reader">Settings for <%= collection.name %></span>
+      <% end %>
+    <% end %>
+  </div>
+
   <%= render "filters/settings", filter: @filter %>
 </header>
 

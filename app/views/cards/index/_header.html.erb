@@ -1,8 +1,4 @@
 <nav class="align-start">
-  <%= link_to_home %>
-
-  <div class="btn btn--placeholder flex-item-justify-start"></div>
-
   <header class="flex flex-inline flex-column center flex-shrink">
     <div class="card-filter--collection flex-inline flex-column align-center center position-relative" data-controller="dialog" data-action="click@document->dialog#closeOnClickOutside keydown.esc->dialog#close">
       <%= tag.button class: "fizzy-menu input input--select flex align-center txt-normal shadow",
@@ -53,18 +49,4 @@
       <% end %>
     </div>
   </header>
-
-  <% if collection = filter.single_collection %>
-    <div class="flex-item-justify-end">
-      <%= access_involvement_advance_button collection, Current.user %>
-    </div>
-
-    <%= link_to edit_collection_path(collection), class: "btn" do %>
-      <%= icon_tag "settings" %>
-      <span class="for-screen-reader">Settings for <%= collection.name %></span>
-    <% end %>
-  <% else %>
-    <div class="btn btn--placeholder flex-item-justify-end"></div>
-    <div class="btn btn--placeholder"></div>
-  <% end %>
 </nav>
