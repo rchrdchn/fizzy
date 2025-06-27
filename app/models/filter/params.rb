@@ -41,7 +41,7 @@ module Filter::Params
       params[:indexed_by]        = indexed_by
       params[:engagement_status] = engagement_status
       params[:creation]          = creation
-      params[:close]             = close
+      params[:closure]           = closure
       params[:assignment_status] = assignment_status
       params[:terms]             = terms
       params[:tag_ids]           = tags.ids

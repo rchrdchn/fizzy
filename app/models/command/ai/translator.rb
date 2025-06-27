@@ -49,7 +49,7 @@ class Command::Ai::Translator
             "tag_ids": string[],
             "creation": "today" | "yesterday" | "thisweek" | "thismonth" | "thisyear"
                       | "lastweek" | "lastmonth" | "lastyear",
-            "completion": "today" | "yesterday" | "thisweek" | "thismonth" | "thisyear"
+            "closure": "today" | "yesterday" | "thisweek" | "thismonth" | "thisyear"
                         | "lastweek" | "lastmonth" | "lastyear"
           },
           "commands": string[]                /* OPTIONAL, each starts with "/" */
@@ -90,7 +90,7 @@ class Command::Ai::Translator
           * tag_ids — array of tag names
           * creation — relative range when the card was **created** (values listed above). Use it only
             when the user asks for cards created in a specific timeframe.
-          * completion — relative range when the card was **completed/closed** (values listed above). Use it
+          * closure — relative range when the card was **completed/closed** (values listed above). Use it
             only when the user asks for cards completed/closed in a specific timeframe. 
       
         ---------------------- EXPLICIT FILTERING RULES ----------------------
@@ -112,7 +112,7 @@ class Command::Ai::Translator
           today, yesterday, thisweek, thismonth, thisyear,
           lastweek, lastmonth, lastyear** ) → indexed_by: "closed"
         
-          – Never add "completion" unless one of the eight
+          – Never add "closure" unless one of the eight
             timeframe tokens is present in the user text.
       
         * Never add the literal words "card" or "cards" to terms; treat them as
@@ -136,7 +136,7 @@ class Command::Ai::Translator
           – Only use "latest" if the user mentions activity, updates, or changes
           – Otherwise, prefer "newest" for generic mentions of “recent”
         * "Completed/closed cards" (no date range) → indexed_by: "closed"
-          – VERY IMPORTANT: Do **not** set "completion" filter unless the user explicitly supplies a timeframe
+          – VERY IMPORTANT: Do **not** set "closure" filter unless the user explicitly supplies a timeframe
             (e.g., “completed this month”, “closed last week”).
           (If the timeframe is supplied with “closed” instead of “completed”, treat it the same way.)
       
@@ -184,11 +184,12 @@ class Command::Ai::Translator
         * Never duplicate the assignee in both commands and context.
           – If the request says “assign to X”, produce only /assign X, never assignee_ids
         * Never add properties tied to UI view ("card", "list", etc.).
-        * To filter completed or closed cards, use "indexed_by: closed", don't set a "completion" filter unless the user is
+        * To filter completed or closed cards, use "indexed_by: closed", don't set a "closure" filter unless the user is
           asking for cards completed in a certain window of time.
         * When you see a word with a # prefix, assume it refers to a tag (either a filter or a command argument, but don't search for it).
         * All filters, including terms, must live **inside** context.
         * Do not duplicate terms across properties.
+        * Don't use "creation" and "closure" filters at the same time. 
         * Avoid redundant terms.
       
         ---------------------------- OUTPUT CLEANLINESS ----------------------------
@@ -238,7 +239,7 @@ class Command::Ai::Translator
         User: completed cards yesterday
         Output:
         {
-          "context": { "indexed_by": "closed", "completion": "yesterday" }
+          "context": { "indexed_by": "closed", "closure": "yesterday" }
         }
       
         User: "cards tagged with #design" or "#design cards"  
@@ -269,7 +270,7 @@ class Command::Ai::Translator
         User: cards completed last week  
         Output:
         {
-          "context": { "completion": "lastweek", "indexed_by": "closed" }
+          "context": { "closure": "lastweek", "indexed_by": "closed" }
         }
       
         Fallback search example (when nothing matches):  
