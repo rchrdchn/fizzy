@@ -150,8 +150,6 @@
   }
 
   .card__link {
-    --hover-size: 0;
-
     content: "";
     inset: 0;
     position: absolute;
@@ -179,7 +177,6 @@
   }
 
   .card__title {
-    --hover-size: 0;
     --input-border-radius: 0;
     --input-color: color-mix(in srgb, var(--card-color) 40%, var(--color-ink));
     --lines: 3;
@@ -215,10 +212,17 @@
     --btn-icon-size: 1em;
     --card-padding-block: calc(var(--block-space) * 1.25);
 
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-link) 20%, var(--color-canvas));
+    box-shadow: 0 0 0 1px oklch(var(--lch-blue-lighter));
     color: var(--btn-color);
     font-weight: 700;
-    transition: none;
+    transition: box-shadow 100ms ease-out;
+
+    @media (any-hover: hover) {
+      &:hover {
+        filter: none;
+        box-shadow: 0 0 0 1px oklch(var(--lch-blue-lighter)), var(--shadow);
+      }
+    }
   }
 
   .card__move-button {
@@ -404,7 +408,6 @@
     --btn-icon-size: 0.75em;
     --btn-padding: 0;
     --btn-size: 1.25em;
-    --hover-size: 0;
 
     position: relative;
     z-index: 1;

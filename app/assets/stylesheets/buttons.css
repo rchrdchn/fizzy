@@ -19,7 +19,7 @@
     pointer-events: auto;
     position: relative;
     transition: 100ms ease-out;
-    transition-property: background-color, border, color, filter, opacity, scale;
+    transition-property: background-color, border, box-shadow, color, filter, opacity, scale;
 
     @media (any-hover: hover) {
       &:hover {
@@ -28,7 +28,7 @@
     }
 
     @media (prefers-color-scheme: dark) {
-      --btn-hover-brightness: 1.5;
+      --btn-hover-brightness: 1.25;
     }
 
     &[disabled],
@@ -55,7 +55,6 @@
     --btn-color: inherit;
     --btn-icon-size: 100%;
     --btn-padding: 0;
-    --hover-size: 0;
     --outline-size: 0;
   }
 
@@ -119,12 +118,7 @@
     --btn-background: var(--color-ink);
     --btn-border-color: var(--color-canvas);
     --btn-color: var(--color-canvas);
-    --btn-hover-brightness: 2;
     --outline-color: var(--color-ink);
-
-    @media (prefers-color-scheme: dark) {
-      --btn-hover-brightness: 0.8;
-    }
   }
 
   /* Toggleable buttons
@@ -132,8 +126,6 @@
 
   .btn {
     :is(input[type=radio], input[type=checkbox]) {
-      --hover-size: 0;
-
       appearance: none;
       border-radius: var(--btn-border-radius);
       cursor: pointer;

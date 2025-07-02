@@ -4,7 +4,6 @@
     --btn-padding: 0.2em 0.5em;
     --btn-border-size: 0;
     --btn-border-radius: 0.2em;
-    --hover-size: 0;
 
     color: inherit;
     inline-size: 100%;
@@ -73,7 +72,6 @@
     --btn-size: 1em;
     --btn-border-radius: 50%;
     --btn-border-size: 0;
-    --hover-size: 0;
 
     cursor: auto;
   }

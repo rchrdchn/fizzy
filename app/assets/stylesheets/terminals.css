@@ -23,8 +23,6 @@
     --btn-border-color: var(--color-terminal-text);
     --btn-padding: 0.1em 0.7em;
     --btn-border-size: 1px;
-    --hover-color: var(--color-terminal-text);
-    --hover-size: 1px;
 
     font-family: var(--font-mono);
     font-size: var(--text-x-small);
@@ -95,7 +93,6 @@
   .terminal__input:is(.input) {
     --input-border-color: transparent;
     --input-border-radius: 0.3em;
-    --hover-color: transparent;
     --input-color: var(--color-terminal-text);
     --outline-size: 0;
     --outline-color: transparent;

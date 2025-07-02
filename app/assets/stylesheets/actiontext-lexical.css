@@ -6,12 +6,12 @@
 
     .node--selected:not(.attachment--custom) {
       &:not(:has(img)) {
-        box-shadow: 0 0 0 var(--hover-size) var(--hover-color);
+        box-shadow: 0 0 0 var(--focus-ring-size) var(--focus-ring-color);
       }
 
       &:has(img) {
         img {
-          box-shadow: 0 0 0 var(--hover-size) var(--hover-color);
+          box-shadow: 0 0 0 var(--focus-ring-size) var(--focus-ring-color);
         }
       }
     }
@@ -172,15 +172,11 @@
     padding: var(--lexical-prompt-padding);
 
     &:hover {
-      background-color: var(--color-selected);
+      background-color: var(--color-ink-lightest);
     }
 
     &[aria-selected] {
-      box-shadow: 0 0 0 var(--hover-size) var(--color-selected-dark) inset;
-
-      &:hover {
-        --hover-size: 0;
-      }
+      background-color: var(--color-selected);
     }
 
     img {
@@ -189,6 +185,10 @@
       flex-shrink: 0;
       inline-size: var(--lexical-prompt-avatar-size);
       margin: 0;
+    }
+
+    + & {
+      margin-top: 2px;
     }
   }
 

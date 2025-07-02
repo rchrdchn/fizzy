@@ -198,10 +198,7 @@
   }
 
   .event--related {
-    --hover-color: var(--card-color);
-    --hover-size: 0.15rem;
-
-    box-shadow: 0 0 0 var(--hover-size) var(--hover-color);
+    box-shadow: 0 0 0 0.15rem var(--card-color);
   }
 
   .event__content {

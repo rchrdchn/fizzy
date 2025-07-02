@@ -63,7 +63,6 @@
   /* ------------------------------------------------------------------------ */
 
   .tray__expander {
-    --hover-size: 0;
     --outline-size: 0;
 
     align-self: stretch;
@@ -116,8 +115,6 @@
   /* ------------------------------------------------------------------------ */
 
   .tray__actions {
-    --hover-size: 0;
-
     align-self: center;
     align-items: stretch;
     border: 1px dashed oklch(var(--lch-white) / 50%);

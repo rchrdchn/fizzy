@@ -26,6 +26,7 @@
 
   .reaction {
     --btn-size: 100%;
+    --reaction-hover-brightness: 0.9;
 
     align-items: center;
     background-color: var(--color-canvas);
@@ -51,17 +52,12 @@
 
     @media (any-hover: hover) {
       &:not(:active):hover {
-        --reaction-border-color: var(--color-ink-medium);
+        filter: brightness(var(--reaction-hover-brightness));
 
-        box-shadow: 0 0 0 var(--hover-size) var(--hover-color);
+        @media (prefers-color-scheme: dark) {
+          --reaction-hover-brightness: 1.25;
+        }
       }
-    }
-
-    &:has(.reaction__input):focus-within {
-      --hover-color: var(--color-selected-dark);
-      --reaction-border-color: var(--color-selected-dark);
-
-      box-shadow: 0 0 0 var(--hover-size) var(--hover-color);
     }
   }
 
@@ -74,6 +70,7 @@
 
   .reaction__delete {
     display: none;
+    translate: 0.25em;
 
     .expanded & {
       display: flex;
@@ -95,7 +92,6 @@
   }
 
   .reaction__input {
-    --hover-size: 0;
     --input-background: transparent;
     --input-border-size: 0;
     --input-padding: 0;

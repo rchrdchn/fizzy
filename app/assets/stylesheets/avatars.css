@@ -2,8 +2,7 @@
   .avatar {
     --avatar-border-radius: 50%;
     --avatar-size-default: 5ch;
-      --btn-border-size: 0;
-      --hover-size: 0;
+    --btn-border-size: 0;
 
     aspect-ratio: 1;
     block-size: var(--avatar-size, var(--avatar-size-default));

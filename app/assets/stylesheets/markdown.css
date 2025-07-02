@@ -1,6 +1,5 @@
 @layer components {
   .heading__link {
-    --hover-size: 0;
     --opacity: 0.5;
     --size: 0.8em;
 

@@ -25,8 +25,6 @@
     text-decoration: none;
 
     &:not([class]) {
-      --hover-size: 0;
-
       color: var(--color-link);
       text-decoration: underline;
       text-decoration-skip-ink: auto;
@@ -52,35 +50,6 @@
       pointer-events: none;
     }
   }
-
-  /* Hover
-  /* ------------------------------------------------------------------------ */
-
-  /* :is(a, button, input, textarea, .switch, .btn) {
-    --outline-size: 2px;
-
-    transition:
-      box-shadow 150ms ease,
-      outline-offset 150ms ease,
-      background-color 150ms ease,
-      opacity 150ms ease;
-
-    @media (any-hover: hover) {
-      &:where(:not(:active):hover) {
-        box-shadow: 0 0 0 var(--hover-size) var(--hover-color);
-      }
-    }
-
-
-    &:where(:focus-visible):focus,
-    &:where(:focus-visible):active {
-      outline: 0;
-    }
-
-    &:focus:not(:focus-visible) {
-      --outline-offset: 0;
-    }
-  } */
 
   ::selection {
     background-color: var(--color-selected);

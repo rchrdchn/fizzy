@@ -218,4 +218,8 @@
   /* Visibility */
   [hidden] { display: none !important; }
   [contents] { display: contents; }
+
+  .hide-focus-ring {
+    --focus-ring-size: 0;
+  }
 }

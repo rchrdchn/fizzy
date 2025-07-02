@@ -19,8 +19,6 @@
   }
 
   .knob__slider {
-    --hover-size: 0;
-
     appearance: none;
     background-color: transparent;
     block-size: var(--knob-size);
@@ -75,7 +73,8 @@
     }
 
     &:has(:focus-visible) {
-      box-shadow: 0 0 0 2px var(--knob-color);
+      outline: var(--focus-ring-size) solid var(--focus-ring-color);
+      outline-offset: 0;
     }
 
     /* Tick marks */

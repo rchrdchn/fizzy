@@ -38,9 +38,6 @@
   --tray-size: clamp(12rem, 25dvw, 24rem);
 
   /* Focus & Hover */
-  --hover-color: var(--color-ink-medium);
-  --hover-size: 2px;
-
   --focus-ring-color: var(--color-link);
   --focus-ring-offset: 1px;
   --focus-ring-size: 2px;

@@ -30,7 +30,7 @@
   }
 
   [open] & {
-    box-shadow: none;
+    filter: none;
   }
 
   .icon {
@@ -44,6 +44,7 @@
   align-items: stretch;
   border-radius: var(--expander-radius);
   flex-direction: column;
+  filter: none;
   gap: 0;
   padding-block-start: var(--expander-height);
 
@@ -92,12 +93,11 @@
 }
 
 .expander__item {
-  --btn-background: transparent;
+  --btn-background: var(--card-color);
   --btn-border-radius: 0.3em;
   --btn-border-size: 0;
   --btn-font-weight: 500;
   --btn-padding: var(--inline-space-half) var(--inline-space);
-  --hover-size: 0;
   --outline-color: transparent;
 
   inline-size: calc(100% + var(--inline-space-double));
@@ -105,8 +105,8 @@
   justify-content: flex-start;
   white-space: nowrap;
 
-  &:hover,
+  /* &:hover,
   &:focus-visible {
     background-color: oklch(var(--lch-canvas) / 15%);
-  }
+  } */
 }

@@ -181,14 +181,13 @@
 
   /* Containers that act like (and contain) inputs */
   .input--actor {
+    outline-offset: -1px;
     transition: box-shadow 150ms ease, outline-offset 150ms ease;
 
     &:focus-within {
       --input-border-color: var(--color-selected-dark);
-      --hover-color: var(--color-selected-dark);
-      --outline-size: 0;
 
-      box-shadow: 0 0 0 var(--hover-size) var(--hover-color);
+      outline: var(--focus-ring-size) solid var(--focus-ring-color);
     }
 
     .input {
@@ -196,7 +195,6 @@
       --input-border-radius: 0;
       --input-background: transparent;
       --input-border-size: 0;
-      --hover-size: 0;
       --outline-size: 0;
       --outline-color: transparent;
 
@@ -222,7 +220,6 @@
   }
 
   .input.boost__input {
-    --hover-size: 0;
     --input-border-radius: 0;
     --input-border-size: 0;
     --input-padding: 0;

@@ -59,14 +59,18 @@
 
     @media (any-hover: hover) {
       &:hover {
-        --hover-size: 0;
-
-        background: var(--color-selected);
+        background: var(--color-ink-lightest);
       }
     }
 
     &[aria-selected] {
-      box-shadow: 0 0 0 var(--hover-size) var(--color-selected-dark) inset;
+      background-color: var(--color-selected);
+
+      @media (any-hover: hover) {
+        &:hover {
+          background-color: var(--color-selected);
+        }
+      }
     }
   }
 
@@ -76,7 +80,6 @@
     --btn-border-size: 0;
     --btn-font-weight: 500;
     --btn-padding: var(--inline-space-half) 0 var(--inline-space-half) var(--inline-space);
-    --hover-size: 0;
     --outline-color: transparent;
 
     flex: 1 1 auto;
@@ -88,11 +91,6 @@
       &:where(:not(:active):hover) {
         --btn-background: var(--color-selected);
       }
-    }
-
-    &[aria-selected] {
-      border-radius: 0.3em;
-      box-shadow: 0 0 0 var(--hover-size) var(--color-selected-dark) inset;
     }
 
     &:has(input:checked)  {
@@ -110,7 +108,6 @@
 
       @media (any-hover: hover) {
         &:where(:not(:active):hover) {
-          --hover-size: 0;
           --btn-background: var(--color-selected);
         }
       }
