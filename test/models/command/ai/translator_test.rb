@@ -167,19 +167,19 @@ class Command::Ai::TranslatorTest < ActionDispatch::IntegrationTest
   vcr_record!
 
   test "get insight" do
-    assert_command({ context: { indexed_by: "latest" }, commands: [ "/insight who is overloaded" ] }, "who is overloaded")
-
-    assert_command({ context: { indexed_by: "latest" }, commands: [ "/insight cards where mike has commented on" ] }, "cards where mike has commented on")
+    assert_command({ context: { indexed_by: "all" }, commands: [ "/insight cards where mike has commented on" ] }, "cards where mike has commented on")
     assert_command({ context: { assignee_ids: ["jz"] }, commands: [ "/insight cards where mike has commented" ] }, "cards where mike has commented assigned to jz")
     assert_command({ context: { indexed_by: "latest" }, commands: [ "/insight are there blockers here?" ] }, "are there blockers here?")
-    assert_command({ context: { indexed_by: "latest" }, commands: [ "/insight stuff that jz has done lately" ] }, "stuff that jz has done lately")
+    assert_command({ context: { indexed_by: "all" }, commands: [ "/insight stuff that jz has done lately" ] }, "stuff that jz has done lately")
+    assert_command({ context: { indexed_by: "latest" }, commands: [ "/insight challenging cards" ] }, "challenging cards")
+    assert_command({ context: { indexed_by: "all" }, commands: [ "/insight who is everywhere?" ] }, "who is everywhere?")
+    assert_command({ context: { indexed_by: "all" }, commands: [ "/insight who is overloaded" ] }, "who is overloaded")
 
-    assert_command({ context: { indexed_by: "latest" }, commands: [ "/insight summarize this" ] }, "summarize this")
+    assert_command({ commands: [ "/insight summarize this" ] }, "summarize this")
     assert_command({ commands: [ "/insight summarize this" ] }, "summarize this", context: :card)
-
     assert_command({ commands: [ "/insight are there blockers?" ] }, "are there blockers?", context: :card)
 
-    assert_command({ context: { indexed_by: "latest" }, commands: [ "/insight cards with much activity" ] }, "cards with much activity")
+    assert_command({ context: { indexed_by: "all" }, commands: [ "/insight cards with much activity" ] }, "cards with much activity")
   end
 
   test "combine commands and filters" do

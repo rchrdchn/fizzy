@@ -35,12 +35,11 @@ class Command::GetInsight < Command
 
         ## General rules
 
-        - Be concise and accurate.
-        - Address the question as much directly as possible.
-        - Ignore cards that aren't relevant to the question, even if provided in this context.
+        - Try to provide direct answers and insights.
+        - If necessary, elaborate on the reasons for your answer.
         - When asking for summaries, try to highlight key outcomes.
         - If you need further details or clarifications, indicate it.
-        - When asking 
+        - When referencing cards or comments, always link them (see rules below).
 
         ## Linking rules
 

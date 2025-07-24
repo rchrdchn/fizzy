@@ -20,6 +20,7 @@ class Filter < ApplicationRecord
     @cards ||= begin
       result = creator.accessible_cards.indexed_by(indexed_by)
       result = result.where(id: card_ids) if card_ids.present?
+      result = result.open unless include_closed_cards?
       result = result.by_engagement_status(engagement_status) if engagement_status.present?
       result = result.unassigned if assignment_status.unassigned?
       result = result.assigned_to(assignees.ids) if assignees.present?
@@ -57,4 +58,9 @@ class Filter < ApplicationRecord
   def cache_key
     ActiveSupport::Cache.expand_cache_key collections.cache_key_with_version, super
   end
+
+  private
+    def include_closed_cards?
+      indexed_by.closed? || closure_window || closers.present? || card_ids.present? || indexed_by.all?
+    end
 end

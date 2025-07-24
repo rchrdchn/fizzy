@@ -57,7 +57,7 @@ class Command::Ai::Translator
           "context": {                 // omit if empty
             "terms":        string[],  // filter cards by keywords
             "indexed_by":   "newest" | "oldest" | "latest" | "stalled"
-                            | "closed" | "closing_soon" | "falling_back_soon",
+                            | "closed" | "closing_soon" | "falling_back_soon" | "all", // "all" is only possible in combination with indexed_by
             "assignee_ids": <person>[],
             "assignment_status": "unassigned",
             "card_ids":     <card_id>[],
@@ -142,6 +142,7 @@ class Command::Ai::Translator
         - **Stop‑words** – ignore “card(s)” in keyword searches
         - Never consider that card-related terms like card, bug, issue, etc. are terms to filter.
         - Always pass person names and stages in downcase.
+        - Make sure you don't filter by tags, stages and others when the user is querying data by certain traits. Use /insight instead.
         - When resolving user names:
           - If there is a match in the list of users, use the full name from there
           - If not, use the full name in the query verbatim
@@ -170,10 +171,12 @@ class Command::Ai::Translator
         ### Context to get insight
 
         - When answering implies analyzing cards and comments, it always needs a context filter.
-          * When there is no suitable filter, use `indexed_by` with `latest`.
+          * When there is no suitable filter, use `indexed_by` with either `latest` or `all`:
+            -> Use "latest" when the query needs to consider open cards only.
+            -> Use "all" when asking about people working on cards.
+            -> Use "all" when the query needs to consider both open and closed cards.
         - Queries that require analyzing cards, comments, people activity, etc. to extract information, ALWAYS
           require a `context` filter.
-          If no suitable filter derived from the query, then always use `indexed_by` with `latest`.
         - If the current context is "inside a card" and the query makes sense in that context, you
           can omit context filter properties.
           * Inside a card you are seeing the card description and the discussion around it. The query may refer to that context.
@@ -186,7 +189,6 @@ class Command::Ai::Translator
 
         - cards assigned to ann  → { context: { assignee_ids: ["ann"] } }
         - cards assigned to jf  → { context: { assignee_ids: ["jf"] } }
-        - #tricky cards  → { context: { tag_ids: ["#tricky"] } }
         - bugs assigned to arthur  → { context: { assignee_ids: ["arthur"] } }
 
         #### Completed by
@@ -238,6 +240,10 @@ class Command::Ai::Translator
         - cards tagged with #tricky  → { context: { tag_ids: ["tricky"] } }
         - #tricky cards  → { context: { tag_ids: ["tricky"] } }
         - #tricky  → { context: { tag_ids: ["tricky"] } }
+
+        **IMPORTANT**: Use /insight if no # is provided, when asking for kinds of cards, don't use a `tag_ids` filter:
+
+        - tricky cards  → { context: { index_by: "latest" }, commands: ["/insight tricky cards"] }
 
         #### Indexed by
 
@@ -312,10 +318,10 @@ class Command::Ai::Translator
         #### Getting insight
 
         - most commented cards → { context: { indexed_by: "latest" }, commands: ["/insight most commented cards"] }
-        - very active cards → { context: { indexed_by: "latest" }, commands: ["/insight very active cards"] }
-        - what has mike done → { context: { indexed_by: "latest" }, commands: ["/insight what has mike done"] }
+        - very active cards → { context: { indexed_by: "all" }, commands: ["/insight very active cards"] }
+        - what has mike done → { context: { indexed_by: "all" }, commands: ["/insight what has mike done"] }
         - summarize cards completed by mike → { context: { closer_ids: ["mike"] }, commands: ["/insight summarize"] }
-        - who is working on the most challenging stuff → { context: { indexed_by: "latest" }, commands: ["/insight who is working on the most challenging stuff"] }
+        - who is working on the most challenging stuff → { context: { indexed_by: "all" }, commands: ["/insight who is working on the most challenging stuff"] }
 
         ### Filters and commands combined
 
@@ -323,7 +329,7 @@ class Command::Ai::Translator
         - assign john to the current #design cards and tag them with #v2  → { context: { tag_ids: ["design"] }, commands: ["/assign john", "/tag #v2"] }
         - close cards assigned to mike and assign them to roger → { context: {assignee_ids: ["mike"]}, commands: ["/close", "/assign roger"] }
         - summarize the cards assigned to jz → { context: { assignee_ids: ["jz"] }, commands: ["/insight summarize"] }
-        - summarize the work that ann has done recently → { context: { indexed_by: ["latest"] }, commands: ["/insight summarize the work that ann has done recently"] }
+        - summarize the work that ann has done recently → { context: { indexed_by: ["all"] }, commands: ["/insight summarize the work that ann has done recently"] }
       PROMPT
     end
 

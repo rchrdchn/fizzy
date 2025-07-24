@@ -4,6 +4,8 @@ module Ai::Prompts
       <<~PROMPT
         ## Current context:
 
+        Today is #{Time.current}
+
         The user is currently #{context.viewing_card_contents? ? 'inside a card' : 'viewing a list of cards' }.     
       PROMPT
     end
