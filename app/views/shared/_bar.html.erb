@@ -1,0 +1,28 @@
+<%= tag.div \
+      class: "terminal full-width flex flex-column justify-end",
+      data: {
+        controller: "bar",
+        bar_dialog_outlet: "#bar-modal",
+        bar_search_url_value: search_path,
+        bar_search_turbo_frame_name_value: "search",
+        bar_ask_url_value: conversation_path,
+        bar_ask_turbo_frame_name_value: "conversation",
+        action: "
+          keydown.meta+k@document->bar#search:prevent keydown.ctrl+k@document->bar#search:prevent
+          keydown.meta+a@document->bar#ask:prevent keydown.ctrl+a@document->bar#ask:prevent"
+      } do %>
+  <div>
+    Search [<%= hotkey_label(["ctrl", "K"]) %>] or Ask [<%= hotkey_label(["ctrl", "A"]) %>]
+  </div>
+
+  <%= tag.dialog \
+    id: "bar-modal",
+    class: "bar__modal panel shadow",
+    data: {
+      controller: "dialog",
+      dialog_target: "dialog",
+      dialog_modal_value: "true",
+      action: "keydown.esc->dialog#close click@document->dialog#closeOnClickOutside" } do %>
+    <%= turbo_frame_tag nil, data: { bar_target: "modalTurboFrame" }, target: "_top" %>
+  <% end %>
+<% end %>

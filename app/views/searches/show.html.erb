@@ -12,27 +12,29 @@
   </nav>
 <% end %>
 
-<%= auto_submit_form_with url: searches_queries_path(q: @query_terms), method: :post %>
+<%= turbo_frame_tag "search", target: :_top do %>
+  <%= auto_submit_form_with url: searches_queries_path(q: @query_terms), method: :post %>
 
-<section class="search">
-  <%= render "searches/form", query_terms: @query_terms %>
+  <section class="search">
+    <%= render "searches/form", query_terms: @query_terms %>
 
-  <div class="search__results">
-    <% if @query_terms.present? && @search_results.none? %>
-      <div class="search__empty">
-        No search results
-      </div>
-    <% end %>
+    <div class="search__results">
+      <% if @query_terms.present? && @search_results.none? %>
+        <div class="search__empty">
+          No search results
+        </div>
+      <% end %>
 
-    <ul class="search__list">
-      <%= render partial: "searches/result", collection: @search_results %>
-    </ul>
-  </div>
+      <ul class="search__list">
+        <%= render partial: "searches/result", collection: @search_results %>
+      </ul>
+    </div>
 
-  <aside class="search__history">
-    <h3>Your recent searches…</h3>
-    <ul class="search__list">
-      <%= render partial: "searches/search_query", collection: @recent_search_queries.first(10) %>
-    </ul>
-  </aside>
-</section>
+    <aside class="search__history">
+      <h3>Your recent searches…</h3>
+      <ul class="search__list">
+        <%= render partial: "searches/search_query", collection: @recent_search_queries.first(10) %>
+      </ul>
+    </aside>
+  </section>
+<% end %>
