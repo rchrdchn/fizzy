@@ -9,7 +9,7 @@
     </div>
     <%= turbo_frame_tag dom_id(@conversation, :messages_container), src: conversation_messages_path, target: "_top" %>
     <%= render partial: "conversations/show/thinking_indicator", locals: { conversation: @conversation } %>
-    <%= render partial: "conversations/show/composer", locals: { conversation: @conversation } %>
+    <%= render partial: "composer" %>
   </div>
 <% end %>
 

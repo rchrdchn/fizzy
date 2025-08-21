@@ -4,24 +4,35 @@
         controller: "bar",
         bar_dialog_outlet: "#bar-modal",
         bar_search_url_value: search_path,
-        bar_search_turbo_frame_name_value: "search",
         bar_ask_url_value: conversation_path,
-        bar_ask_turbo_frame_name_value: "conversation",
-        action: "
-          keydown.meta+k@document->bar#search keydown.ctrl+k@document->bar#search
-          keydown.meta+a@document->bar#ask keydown.ctrl+a@document->bar#ask"
       } do %>
-  <div class="flex justify-center gap" hidden>
-    <button class="btn btn--plain" data-action="bar#search">
+  <div class="flex justify-center gap">
+    <%= tag.button \
+          class: "btn btn--plain",
+          data: {
+            controller: "hotkey",
+            action: "
+            bar#search
+            keydown.meta+k@document->bar#search keydown.ctrl+k@document->bar#search" } do %>
       <span>Search [<%= hotkey_label(["ctrl", "K"]) %>]</span>
-    </button>
+    <% end %>
     <span>or</span>
-    <button class="btn btn--plain" data-action="bar#ask">
+    <%= tag.button \
+          class: "btn btn--plain",
+          data: {
+            controller: "hotkey",
+            action: "
+            bar#ask
+            keydown.meta+a@document->bar#ask keydown.ctrl+a@document->bar#ask" } do %>
       <span>Ask [<%= hotkey_label(["ctrl", "A"]) %>]</span>
-    </button>
+    <% end %>
   </div>
 
-  <%= render "searches/form", query_terms: @query_terms %>
+  <div hidden>
+    <%= render "searches/form", query_terms: "" %>
+
+    <%= render "conversations/composer" %>
+  </div>
 
   <%= tag.dialog \
     id: "bar-modal",
