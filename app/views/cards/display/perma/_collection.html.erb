@@ -20,7 +20,7 @@
         <% end %>
 
         <ul class="popup__list margin-block-start-half margin-none-block-end" data-filter-target="list">
-          <% Current.user.collections.alphabetically.each do |collection| %>
+          <% Current.user.collections.ordered_by_recently_accessed.each do |collection| %>
             <li class="popup__group" data-filter-target="item" data-navigable-list-target="item">
               <%= button_to card_collection_path(card, params: { collection_id: collection.id }), method: :patch,
                   class: "popup__item btn",
