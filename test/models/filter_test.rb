@@ -95,7 +95,7 @@ class FilterTest < ActiveSupport::TestCase
     assert_changes "filter.reload.updated_at" do
       tags(:mobile).destroy!
     end
-    assert_nil filter.reload.as_params[:tag_ids]
+    assert_nil Filter.find(filter.id).as_params[:tag_ids]
 
     Current.set session: sessions(:david) do
       assert_changes "Filter.exists?(filter.id)" do

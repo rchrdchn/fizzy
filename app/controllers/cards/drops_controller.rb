@@ -25,16 +25,20 @@ class Cards::DropsController < ApplicationController
     def perform_drop_action
       case @drop_target
       when :considering
-          @card.reconsider
+        @card.reconsider
       when :on_deck
-          @card.move_to_on_deck
+        @card.move_to_on_deck
       when :doing
-          @card.engage
+        @card.engage
       end
     end
 
     def render_column_replacement
       page_and_filter = page_and_filter_for @filter.with(engagement_status: @drop_target.to_s), per_page: CardsController::PAGE_SIZE
-      render turbo_stream: turbo_stream.replace("#{@drop_target.to_s.gsub('_', '-')}-cards", method: :morph, partial: "cards/index/engagement/#{@drop_target}", locals: page_and_filter.to_h)
+      render \
+        turbo_stream: turbo_stream.replace("#{@drop_target.to_s.gsub('_', '-')}-cards",
+        method: :morph,
+        partial: "cards/index/engagement/#{@drop_target}",
+        locals: { user_filtering: @user_filtering, **page_and_filter.to_h })
     end
 end
