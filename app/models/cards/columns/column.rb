@@ -1,10 +1,9 @@
 class Cards::Columns::Column
-  attr_reader :page, :user_filtering
+  attr_reader :page, :filter, :user_filtering
 
-  delegate :filter, to: :user_filtering
-
-  def initialize(page:, user_filtering:)
+  def initialize(page:, filter:, user_filtering:)
     @page = page
+    @filter = filter
     @user_filtering = user_filtering
   end
 

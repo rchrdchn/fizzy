@@ -36,6 +36,6 @@ class Cards::Columns
     def build_column(filter, &block)
       cards = block ? yield(filter.cards) : filter.cards
 
-      Column.new(page: GearedPagination::Recordset.new(cards, per_page: page_size).page(1), user_filtering: user_filtering)
+      Column.new(page: GearedPagination::Recordset.new(cards, per_page: page_size).page(1), filter: filter, user_filtering: user_filtering)
     end
 end
