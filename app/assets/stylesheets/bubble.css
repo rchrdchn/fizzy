@@ -54,7 +54,7 @@
   }
 
   .bubble--doing,
-  .bubble--considering {
+  .bubble--on_deck {
     inset-inline-start: 100%;
     translate: -60% -60%;
 
