@@ -88,9 +88,9 @@ module EventsHelper
     when "card_reopened"
       "#{h event_creator_name(event) } reopened <span style='color: var(--card-color)'>\"#{h title }\"</span>".html_safe
     when "card_postponed"
-      "#{h event_creator_name(event) } moved <span style='color: var(--card-color)'>\"#{h title }\"</span> to "Not Now"".html_safe
+      "#{h event_creator_name(event) } moved <span style='color: var(--card-color)'>\"#{h title }\"</span> to “Not Now”.html_safe
     when "card_auto_postponed"
-      "<span style='color: var(--card-color)'>\"#{h title }\"</span> was closed as "Not Now" due to inactivity".html_safe
+      "<span style='color: var(--card-color)'>\"#{h title }\"</span> was closed as “Not Now” due to inactivity".html_safe
     when "card_resumed"
       "#{h event_creator_name(event) } resumed <span style='color: var(--card-color)'>\"#{h title }\"</span>".html_safe
     when "card_due_date_added"
