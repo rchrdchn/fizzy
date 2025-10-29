@@ -10,7 +10,9 @@ module WebhooksHelper
     card_due_date_removed: "Card due date removed",
     card_published: "Card published",
     card_reopened: "Card reopened",
+    card_sent_back_to_triage: "Card move back to Maybe",
     card_title_changed: "Card title changed",
+    card_triaged: "Card column changed",
     card_unassigned: "Card unassigned",
     comment_created: "Comment created"
   }.with_indifferent_access.freeze
