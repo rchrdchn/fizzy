@@ -179,16 +179,19 @@
       display: none;
     }
 
-    & ~ .btn {
-      --btn-background: var(--card-color);
-      --btn-color: var(--color-ink-inverted);
-    }
-  }
-
-  .card-field__description {
     lexxy-toolbar {
       border-block-start: 1px solid var(--color-ink-light);
       margin-block-start: var(--block-space-half) !important;
+    }
+
+    & ~ .btn.btn--reversed {
+      --btn-background: var(--card-color);
+      --btn-color: var(--color-ink-inverted);
+    }
+
+    & ~ .btn {
+      --btn-border-color: var(--card-color);
+      --btn-color: var(--card-color);
     }
   }
 
