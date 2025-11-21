@@ -44,7 +44,9 @@ class Search::Record < ApplicationRecord
   end
 
   scope :matching, ->(query, account_id) do
-    where("MATCH(#{table_name}.account_key, #{table_name}.content, #{table_name}.title) AGAINST(? IN BOOLEAN MODE)", query)
+    account_key = "account#{account_id}"
+    full_query = "+#{account_key} +(#{query})"
+    where("MATCH(#{table_name}.account_key, #{table_name}.content, #{table_name}.title) AGAINST(? IN BOOLEAN MODE)", full_query)
   end
 
   scope :for_user, ->(user) do
