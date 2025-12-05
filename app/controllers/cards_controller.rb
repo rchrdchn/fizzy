@@ -32,11 +32,20 @@ class CardsController < ApplicationController
 
   def update
     @card.update! card_params
+
+    respond_to do |format|
+      format.turbo_stream
+      format.json { render :show }
+    end
   end
 
   def destroy
     @card.destroy!
-    redirect_to @card.board, notice: "Card deleted"
+
+    respond_to do |format|
+      format.html { redirect_to @card.board, notice: "Card deleted" }
+      format.json { head :no_content }
+    end
   end
 
   private
