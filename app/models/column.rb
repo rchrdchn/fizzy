@@ -6,10 +6,5 @@ class Column < ApplicationRecord
   has_many :cards, dependent: :nullify
 
   after_save_commit    -> { cards.touch_all }, if: -> { saved_change_to_name? || saved_change_to_color? }
-  after_create_commit  -> { sibling_columns.touch_all }
-  after_destroy_commit -> { board.cards.touch_all; sibling_columns.touch_all }
-
-  def sibling_columns
-    board.columns.where.not(id:).sorted
-  end
+  after_destroy_commit -> { board.cards.touch_all }
 end
