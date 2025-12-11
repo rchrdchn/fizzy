@@ -107,8 +107,20 @@ module Authentication
       end
     end
 
+    def email_address_pending_authentication_matches?(email_address)
+      pending_email_address = session.fetch(:email_address_pending_authentication, "")
+
+      if ActiveSupport::SecurityUtils.secure_compare(email_address, pending_email_address)
+        session.delete(:email_address_pending_authentication)
+        true
+      else
+        false
+      end
+    end
+
     def redirect_to_session_magic_link(magic_link, return_to: nil)
       serve_development_magic_link(magic_link)
+      session[:email_address_pending_authentication] = magic_link.identity.email_address if magic_link
       session[:return_to_after_authenticating] = return_to if return_to
       redirect_to session_magic_link_url(script_name: nil)
     end
