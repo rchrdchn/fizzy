@@ -1,14 +1,33 @@
-<h1>Edit Account <%= @account.external_account_id %></h1>
+<div class="panel shadow center" style="--panel-size: 50ch;">
+  <div class="flex flex-column gap txt-medium">
+    <h1 class="txt-x-large font-weight-black margin-block-none">Edit Account <%= @account.external_account_id %></h1>
 
-<p><strong>Name:</strong> <%= @account.name %></p>
+    <dl class="flex flex-column gap-half margin-block-none">
+      <div class="flex gap-half">
+        <dt class="font-weight-bold">Name:</dt>
+        <dd class="margin-inline-start-none"><%= @account.name %></dd>
+      </div>
+      <div class="flex gap-half">
+        <dt class="font-weight-bold">Actual card count:</dt>
+        <dd class="margin-inline-start-none"><%= @account.cards_count %></dd>
+      </div>
+    </dl>
 
-<%= form_with model: @account, url: saas.admin_account_path(@account.external_account_id) do |form| %>
-  <p>
-    <%= form.label :cards_count %>
-    <%= form.number_field :cards_count %>
-  </p>
+    <%= form_with model: @account, url: saas.admin_account_path(@account.external_account_id), class: "flex flex-column gap" do |form| %>
+      <div class="flex flex-column gap-half">
+        <%= form.label :overridden_card_count, "Override card count", class: "font-weight-bold" %>
+        <div class="flex align-center gap input input--actor">
+          <%= form.number_field :overridden_card_count, value: @account.overridden_limits&.card_count, class: "input full-width" %>
+        </div>
+      </div>
 
-  <%= form.submit "Update" %>
-<% end %>
+      <button type="submit" class="btn btn--reversed">Save</button>
+    <% end %>
 
-<p><%= link_to "Back", saas.admin_accounts_path %></p>
+    <% if @account.overridden_limits %>
+      <%= button_to "Reset limits", saas.admin_account_overridden_limits_path(@account.external_account_id), method: :delete, class: "btn btn--negative" %>
+    <% end %>
+
+    <%= link_to "Back to accounts", saas.admin_accounts_path, class: "btn btn--plain txt-link" %>
+  </div>
+</div>

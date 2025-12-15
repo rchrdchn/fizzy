@@ -1,0 +1,34 @@
+module Account::Limited
+  extend ActiveSupport::Concern
+
+  included do
+    has_one :overridden_limits, class_name: "Account::OverriddenLimits", dependent: :destroy
+  end
+
+  NEAR_CARD_LIMIT_THRESHOLD = 100
+
+  def override_limits(card_count:)
+    if overridden_limits
+      overridden_limits.update(card_count: card_count)
+    else
+      create_overridden_limits(card_count: card_count)
+    end
+  end
+
+  def billed_cards_count
+    overridden_limits&.card_count || cards_count
+  end
+
+  def nearing_plan_cards_limit?
+    plan.limit_cards? && (plan.card_limit - billed_cards_count) < NEAR_CARD_LIMIT_THRESHOLD
+  end
+
+  def exceeding_card_limit?
+    plan.limit_cards? && billed_cards_count > plan.card_limit
+  end
+
+  def reset_overridden_limits
+    overridden_limits&.destroy
+    reload_overridden_limits
+  end
+end

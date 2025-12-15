@@ -1,10 +1,6 @@
 require "test_helper"
 
 class Admin::StatsControllerTest < ActionDispatch::IntegrationTest
-  def saas
-    Fizzy::Saas::Engine.routes.url_helpers
-  end
-
   test "staff can access stats" do
     sign_in_as :david
 

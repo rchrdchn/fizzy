@@ -5,6 +5,8 @@ Fizzy::Saas::Engine.routes.draw do
     mount Audits1984::Engine, at: "/console"
     get "stats", to: "stats#show"
     resource :account_search, only: :create
-    resources :accounts
+    resources :accounts do
+      resource :overridden_limits, only: :destroy
+    end
   end
 end

@@ -1,10 +1,6 @@
 require "test_helper"
 
 class Admin::AccountsControllerTest < ActionDispatch::IntegrationTest
-  def saas
-    Fizzy::Saas::Engine.routes.url_helpers
-  end
-
   test "staff can access index" do
     sign_in_as :david
 
@@ -34,15 +30,15 @@ class Admin::AccountsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "staff can update cards_count" do
+  test "staff can override card count" do
     sign_in_as :david
 
     untenanted do
-      patch saas.admin_account_path(accounts(:"37s").external_account_id), params: { account: { cards_count: 500 } }
+      patch saas.admin_account_path(accounts(:"37s").external_account_id), params: { account: { overridden_card_count: 500 } }
       assert_redirected_to saas.edit_admin_account_path(accounts(:"37s").external_account_id)
     end
 
-    assert_equal 500, accounts(:"37s").reload.cards_count
+    assert_equal 500, accounts(:"37s").reload.billed_cards_count
   end
 
   test "non-staff cannot access accounts" do
