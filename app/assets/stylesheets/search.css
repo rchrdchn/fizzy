@@ -116,8 +116,6 @@ summary {
   /* ------------------------------------------------------------------------ */
 
   .search-perma {
-    margin-block-start: var(--block-space);
-
     .search__form > label,
     .search__reset {
       display: none;

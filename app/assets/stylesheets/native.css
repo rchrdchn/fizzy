@@ -14,8 +14,8 @@
     /* ------------------------------------------------------------------------ */
 
     .header:is(
-      :not(:has(.header__actions)),
-      :not(:has(.header__actions--end)):has(.header__actions--start .btn--back:only-child)
+      :not(:has(.header__title, .header__actions)),
+      :not(:has(.header__title, .header__actions--end)):has(.header__actions--start .btn--back:only-child)
     ) {
       display: none;
     }
